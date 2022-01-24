@@ -1,0 +1,31 @@
+heights <- read.table("Student.Heights.txt")
+heights <- heights[,1] 
+
+print(heightsmean <- mean(heights))
+print(heightsmedian <- median(heights))
+print(heightsIQR <- IQR(heights))
+heightsSort <- sort(heights, decreasing=TRUE)
+print(trimmedMean <- mean(heightsSort, trim=.1))
+
+sorted40 <- heightsSort[1:40]
+heightAvg40 <- mean(sorted40)
+print(heightAvg40)
+
+z <- (heights - mean(heights))/sd(heights)
+cutoffs = c(0:12)*0.5 - 3;
+hist(z, main = "Histogram of Transformed Student 
+Heights Data", breaks = cutoffs, xlab = "Z Score")
+
+zscores <- (heights - mean(heights))/sd(heights)
+numz <- vector()
+for(i in 1:length(zscores)){
+    if(zscores[i] > -3 & zscores[i] < 3){
+        numz <- append(numz, heights[i])
+    }
+}
+
+print((length(numz)/length(heights))*100)
+
+
+
+
